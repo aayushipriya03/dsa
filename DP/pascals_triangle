@@ -1,0 +1,20 @@
+ vector<vector<int>> generate(int numRows) {
+        vector<vector<int>>v;
+        int c[ numRows+1][ numRows+1];
+        c[0][0]=1;
+        vector<int>z;
+        z.push_back(1);
+        v.push_back(z);
+       for(int i=1;i<numRows;i++){
+           vector<int>v1;
+         for(int r=0;r<=i;r++){
+               if(r==0||r==i)c[i][r]=1;
+               else{
+                   c[i][r]=c[i-1][r-1]+c[i-1][r];
+               }
+             v1.push_back(c[i][r]);
+           }
+           v.push_back(v1);
+       }
+       return v; 
+    }

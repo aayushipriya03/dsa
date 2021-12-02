@@ -1,0 +1,21 @@
+int trap(vector<int>& height) {
+      int n=height.size();
+        int left[n];
+        int right[n];
+        int ma=height[0];
+        int m2=height[n-1];
+        for(int i=0;i<n;i++){
+            if(height[i]>ma)ma=height[i];
+            left[i]=ma;
+        }
+        for(int i=n-1;i>=0;i--){
+            if(height[i]>m2)m2=height[i];
+            right[i]=m2;
+        }
+        int sum=0;
+        for(int i=0;i<n;i++){
+            int res=min(left[i],right[i]);
+            if(res-height[i]>0)sum+=(res-height[i]);
+        }
+        return sum;
+    }
