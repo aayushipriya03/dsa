@@ -1,0 +1,16 @@
+ bool subArrayExists(int arr[], int n)
+    {
+       unordered_map<int,int> m;
+         m[arr[0]]=0;
+       int sum=arr[0];
+       if(sum==0)return true;
+       for(int i=1;i<n;i++){
+          
+          sum+=arr[i];
+           if(sum==0)return true;
+          if(m.find(sum)!=m.end())return true;
+         m[sum]=i;
+       }
+       return false;
+       //Your code here
+    }
