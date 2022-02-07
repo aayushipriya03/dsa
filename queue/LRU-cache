@@ -1,0 +1,58 @@
+class LRUCache
+{
+    private:
+
+    public:
+      list<pair<int, int>> dq;
+    unordered_map<int, list<pair<int, int>>::iterator> ma;
+    int cap1 = 0;
+    //Constructor for initializing the cache capacity with the given value.
+    LRUCache(int cap)
+    {
+      cap1 = cap;
+        // code here
+    }
+    
+    //Function to return value corresponding to the key.
+    int get(int key)
+    {
+       if(ma.find(key) != ma.end())
+        {
+            int val = ma[key]->second;
+            dq.erase(ma[key]);
+            dq.push_front(make_pair(key, val));
+            ma[key] = dq.begin();
+            
+            return val;
+        }
+        else
+            return -1;// your code here
+    }
+    
+    //Function for storing key-value pair.
+    void set(int key, int value)
+    {
+      // not present in cache
+        if (ma.find(key) == ma.end()) {
+            // cache is full
+            if (dq.size() == cap1) {
+                // delete least recently used element
+                int last = (dq.back()).first;
+ 
+                // Pops the last element
+                dq.pop_back();
+ 
+                // Erase the last
+                ma.erase(last);
+            }
+        }
+ 
+        // present in cache
+        else
+            dq.erase(ma[key]);
+ 
+        // update reference
+        dq.push_front(make_pair(key, value));
+        ma[key] = dq.begin(); 
+    }
+};
